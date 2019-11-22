@@ -94,10 +94,10 @@ public class ZombieWar {
    
    private void print() {
        // Print number of survivors and zombies
-       System.out.println("We have " + survivors.length + " survivors trying to make it to safety.");
-       System.out.println("But there are " + zombies.length + " zombies waiting for them.");
-       
-
+       System.out.println("We have " + survivors.length + " survivors trying to make it to safety (" + childNum
+               + " children, " + teacherNum + " teachers, " + soldierNum + " soldiers)");
+       System.out.println("But there are " + zombies.length + " zombies waiting for them (" + cInfectedNum
+               + " common infected, " + tankNum + " tanks)");
    }
 
 
@@ -126,6 +126,7 @@ public class ZombieWar {
 
 
    // Returns the number of characters in the array that are alive
+
 
    private static int safeCount(Character[] characters) {
        int safe = 0;
@@ -170,12 +171,16 @@ public class ZombieWar {
    * number of survivors that made it to safety.
    */
    public void war() {
-       if ((safeCount(survivors) > 0) && (safeCount(zombies) > 0)) {
-           warResult();
+       while ((safeCount(survivors) > 0) && (safeCount(zombies) > 0)) {
+           // Make each survivor attack every zombie
+           attack(survivors, zombies);
+
+           // Make each zombie attack every survivor
+           attack(zombies, survivors);
        }
 
        // Print number of survivors that made to safety.
-       
+       warResult();
    }
 
  
@@ -188,7 +193,7 @@ public class ZombieWar {
            System.out.println("None of the survivors made it.");
 		}
        else {
-           System.out.println("It seems " + random.nextInt(survivorCount) + " have made it to safety.");
+           System.out.println("It seems " + survivorCount + " have made it to safety.");
 		}
    }
 }
