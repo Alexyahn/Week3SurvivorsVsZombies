@@ -196,4 +196,26 @@ public class ZombieWar {
            System.out.println("It seems " + survivorCount + " have made it to safety.");
 		}
    }
+   
+   //for getting a random weapon 
+   private static Weapon randomWeapon() {
+        Random rand = new Random();
+        int weaponType = rand.nextInt(7);
+        switch (weaponType) {
+            case 0: 
+                return new FryingPan();
+            case 1:
+                return new SubmachineGun();
+            case 2:
+                return new AssaultRifle();
+            case 3:
+                return new Pistol();
+            case 4:
+                return new Axe();
+            case 5:
+                return new Crowbar();
+            default:
+                return new Shotgun();
+        }
+    }    
 }
